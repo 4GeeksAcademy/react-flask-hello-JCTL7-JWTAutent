@@ -1,0 +1,266 @@
+/* =================================================
+BASE LAYOUT
+================================================= */
+
+html, body, #root {
+  height: 100%;
+}
+
+body{
+  font-family: system-ui, -apple-system, sans-serif;
+  background:#ffffff;
+}
+
+.app-wrapper{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.app-content{
+  flex:1;
+}
+
+/* =================================================
+PAGE CONTAINER
+================================================= */
+
+.page-container{
+  min-height:85vh;
+  padding-top:40px;
+  padding-bottom:40px;
+}
+
+/* =================================================
+NAVBAR (optional refinements)
+================================================= */
+
+.navbar{
+  border-bottom:1px solid #eee;
+}
+
+/* =================================================
+FOOTER
+================================================= */
+
+.footer{
+  background:#111;
+}
+
+.footer-link{
+  color:#bbb;
+  text-decoration:none;
+  display:block;
+  margin-bottom:6px;
+}
+
+.footer-link:hover{
+  color:white;
+}
+
+.social-icon{
+  color:#bbb;
+  transition:0.3s;
+}
+
+.social-icon:hover{
+  color:#ff3cac;
+  transform:scale(1.2);
+}
+
+/* =================================================
+AUTH
+================================================= */
+
+.auth-wrapper{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f8f9fa;
+}
+
+.auth-card{
+  width:400px;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  background:white;
+}
+
+.auth-link{
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* =================================================
+ROUTINE CARD
+================================================= */
+
+.routine-card{
+  border-radius:10px;
+  transition:all .25s ease;
+}
+
+.routine-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* =================================================
+HERO SECTION
+================================================= */
+
+.hero-section{
+  background:linear-gradient(135deg,#5f2c82,#ff3cac);
+  color:white;
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  padding:80px 0;
+}
+
+.hero-section .container{
+  max-width:1200px;
+}
+
+.hero-title{
+  font-size:3rem;
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:1.5rem;
+}
+
+.hero-subtitle{
+  font-size:1.2rem;
+  margin-bottom:2rem;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:15px;
+}
+
+.hero-image{
+  width:100%;
+  max-height:450px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* =================================================
+EXERCISES SECTION
+================================================= */
+
+.exercise-section{
+  padding:80px 0;
+  background:#f8f9fa;
+}
+
+.section-title{
+  text-align:center;
+  font-weight:700;
+  margin-bottom:50px;
+}
+
+.exercise-card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  transition:all .25s ease;
+  height:100%;
+}
+
+.exercise-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.exercise-image{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.exercise-body{
+  padding:15px;
+}
+
+.exercise-title{
+  font-weight:600;
+  text-transform:capitalize;
+}
+
+.exercise-info{
+  font-size:0.9rem;
+  color:#6c757d;
+  margin-bottom:5px;
+}
+
+/* =================================================
+HOW SECTION
+================================================= */
+
+.how-section{
+  padding:80px 0;
+}
+
+.step-title{
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+.step-text{
+  color:#6c757d;
+}
+
+/* =================================================
+RESPONSIVE
+================================================= */
+
+@media (max-width:992px){
+
+.hero-section{
+  text-align:center;
+}
+
+.hero-buttons{
+  justify-content:center;
+}
+
+.hero-image{
+  margin-top:30px;
+}
+
+}
+
+@media (max-width:768px){
+
+.hero-title{
+  font-size:2.2rem;
+}
+
+.hero-buttons{
+  flex-direction:column;
+  align-items:center;
+}
+
+.exercise-image{
+  height:180px;
+}
+
+}
+
+@media (max-width:576px){
+
+.hero-title{
+  font-size:1.9rem;
+}
+
+.section-title{
+  font-size:1.8rem;
+}
+
+}

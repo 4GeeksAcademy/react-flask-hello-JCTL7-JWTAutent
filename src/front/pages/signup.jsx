@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthCard from "../components/AuthCard";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setError(null);
 
     try {
       const response = await fetch(
@@ -22,7 +25,7 @@ const Signup = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.msg || "Error al registrar usuario");
+        setError(data.msg || "Error al registrar usuario");
         return;
       }
 
@@ -30,34 +33,24 @@ const Signup = () => {
       navigate("/login");
 
     } catch (error) {
-      console.error("Signup error:", error);
+      setError("Error de conexión con el servidor");
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Registro</h2>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="form-control mb-3"
-          type="email"
-          placeholder="Correo"
-          onChange={e => setEmail(e.target.value)}
-        />
-
-        <input
-          className="form-control mb-3"
-          type="password"
-          placeholder="Contraseña"
-          onChange={e => setPassword(e.target.value)}
-        />
-
-        <button type="submit" className="btn btn-primary">
-          Registrarse
-        </button>
-      </form>
-    </div>
+    <AuthCard
+      title="Crear Cuenta"
+      buttonText="Registrarse"
+      onSubmit={handleSubmit}
+      email={email}
+      password={password}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      error={error}
+      footerText="¿Ya tienes cuenta?"
+      footerLinkText="Inicia sesión"
+      footerLinkTo="/login"
+    />
   );
 };
 
