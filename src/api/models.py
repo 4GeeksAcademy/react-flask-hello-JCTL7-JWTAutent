@@ -61,6 +61,21 @@ class Routine(db.Model):
             "is_public": self.is_public,
             "created_by": self.created_by
         }
+    @property
+    def exercises(self):
+        return [re.exercise.serialize() for re in self.routine_exercises]
+
+    def serialize_detailed(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'difficulty': self.difficulty,
+            'style': self.style,
+            'is_public': self.is_public,
+            'created_by': self.created_by,
+            'exercises': [re.serialize() for re in self.routine_exercises]
+        }
 
 
 # GOALS
@@ -143,3 +158,52 @@ class TrainingLog(db.Model):
             "completed_at": self.completed_at,
             "routine": self.routine.serialize()
         }    
+    
+
+# =========================
+# EXERCISES
+# =========================
+
+class Exercise(db.Model):
+    __tablename__ = "exercise"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(120), nullable=False)
+
+    muscle = db.Column(db.String(50))
+    equipment = db.Column(db.String(50))
+    type = db.Column(db.String(50))
+
+    gif_url = db.Column(db.String(300))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "target": self.muscle,
+            "equipment": self.equipment,
+            "type": self.type,
+            "gifUrl": self.gif_url
+        }
+    
+class RoutineExercise(db.Model):
+    __tablename__ = 'routine_exercise'
+    id = db.Column(db.Integer, primary_key=True)
+    routine_id = db.Column(db.Integer, db.ForeignKey('routine.id'), nullable=False)
+    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'), nullable=False)
+    sets = db.Column(db.Integer, default=3)
+    reps = db.Column(db.String(20), default='10')  # puede ser "10-12" o un rango
+    order = db.Column(db.Integer, default=0)  # orden dentro de la rutina
+
+    routine = db.relationship('Routine', backref=db.backref('routine_exercises', cascade='all, delete-orphan'))
+    exercise = db.relationship('Exercise')
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'exercise': self.exercise.serialize(),
+            'sets': self.sets,
+            'reps': self.reps,
+            'order': self.order
+        }

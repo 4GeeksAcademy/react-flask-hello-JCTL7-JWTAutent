@@ -1,8 +1,12 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const RoutineCard = ({ routine, onView }) => {
+const RoutineCard = ({ routine }) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="col-sm-6 col-md-4 col-lg-3">
+
       <div className="card routine-card h-100">
 
         <div className="card-body d-flex flex-column">
@@ -27,7 +31,7 @@ const RoutineCard = ({ routine, onView }) => {
 
           <button
             className="btn btn-dark mt-auto"
-            onClick={() => onView(routine)}
+            onClick={() => navigate(`/routines/${routine.id}`)}
           >
             Ver rutina
           </button>
@@ -35,6 +39,7 @@ const RoutineCard = ({ routine, onView }) => {
         </div>
 
       </div>
+
     </div>
   );
 };
